@@ -1,61 +1,67 @@
-// Bottom up
-
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define PI 3.1415926535897932384626
-#define si(x) scanf("%d", &x)
-#define sl(x) scanf("%lld", &x)
-#define ss(s) scanf("%s", s)
-#define pi(x) printf("%d\n", x)
-#define pl(x) printf("%lld\n", x)
-#define ps(s) printf("%s\n", s)
-#define br printf("\n")
+#define PI 3.14159265
+#define br cout << endl
 #define fo(i, n) for (int i = 0; i < n; i++)
-#define Fo(i, k, n) for (i = k; k < n ? i < n : i > n; k < n ? i += 1 : i -= 1)
-#define deb(x) cout << #x << " = " << x << endl;
-#define deb2(x, y) cout << #x << " = " << x << ", " << #y << " = " << y << endl
-#define deba(i, a, n) \
-    fo(i, n) { cout << a[i] << " "; }
+#define Fo(i, k, n) for (int i = k; k < n ? i < n : i > n; k < n ? i += 1 : i -= 1)
+#define amazing ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
+#define ff first
+#define ss second
+#define pb push_back
+#define file_read                     \
+    freopen("input.txt", "r", stdin); \
+    freopen("output.txt", "w", stdout);
 typedef pair<int, int> pii;
-typedef pair<ll, ll> pl;
+typedef pair<ll, ll> pll;
 typedef vector<int> vi;
 typedef vector<ll> vl;
+typedef vector<string> vs;
 typedef vector<pii> vpii;
-typedef vector<pl> vpl;
+typedef vector<pll> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+typedef map<int, int> mii;
+typedef map<ll, ll> mll;
+int m = 1e9 + 7;
+int p = 31;
 
 int main()
 {
-
+    amazing;
+    // ll t = 1;
+    // cin >> t;
+    // while (t--)
+    // {
+    // }
     ll n, k;
     cin >> n >> k;
-    vl h(1, 0);
-    ll x;
-    fo(i, n)
+    vl h(n + 1);
+    Fo(i, 1, n + 1)
     {
-        sl(x);
-        h.push_back(x);
+        cin >> h[i];
     }
-    vl res(n + 5, 0);
-    res[2] = abs(h[2] - h[1]);
-    res[1] = 0;
-    for (int j = 3; j <= n; j++)
+    ll dp[n + 1];
+    fo(i, n + 1)
     {
-        vl temp;
-        for (int i = 0; i < k; i++)
+        dp[i] = 0;
+    }
+    dp[0] = 0;
+    dp[1] = 0;
+    dp[2] = abs(h[2] - h[1]);
+    Fo(i, 3, n + 1)
+    {
+        ll minimum_val = m;
+        Fo(j, 1, k + 1)
         {
-            if (j - i - 1 >= 1)
-            {
-                ll r;
-                r = res[j - i - 1] + abs(h[j] - h[j - i - 1]);
-                temp.push_back(r);
-            }
+            if (i > j)
+                minimum_val = min(minimum_val, dp[i - j] + abs(h[i] - h[i - j]));
+            else
+                break;
         }
-        sort(temp.begin(), temp.end());
-        res[j] = temp[0];
+        dp[i] = minimum_val;
     }
-    cout << res[n] << endl;
+    cout << dp[n];
+    br;
     return 0;
 }

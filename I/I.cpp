@@ -1,5 +1,3 @@
-// Bottom up
-
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -26,37 +24,40 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+const int INF = 0x3f3f3f3f;
 int MOD = 1e9 + 7;
+
+
+float func(int* res, int pos)
+{
+    while (pos)
+}
+
+int solution()
+{
+    ll N;
+    sl(N);
+    vector<float> p;
+    res = 1;
+    fo(i, N)
+    {
+        float x;
+        cin >> x;
+        p.push_back(x);
+        res = res*x;
+    }   
+    float ans = func(&res, 1);
+    return 0;
+}
 
 int main()
 {
     amazing;
-    ll n, W;
-    cin >> n >> W;
-    ll wt[101], val[101];
-    for (ll i = 1; i <= n; i++)
+    ll t = 1;
+    //si(t);
+    while (t--)
     {
-        cin >> wt[i] >> val[i];
+        solution();
     }
-    ll k[n + 1][W + 1];
-    for (int i = 0; i <= n; i++)
-    {
-        for (int w = 0; w <= W; w++)
-        {
-            if (i == 0 || w == 0)
-            {
-                k[i][w] = 0;
-            }
-            else if (wt[i] <= w)
-            {
-                k[i][w] = max(k[i - 1][w], val[i] + k[i - 1][w - wt[i]]);
-            }
-            else
-            {
-                k[i][w] = k[i - 1][w];
-            }
-        }
-    }
-    cout << k[n][W] << endl;
     return 0;
 }

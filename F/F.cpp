@@ -1,5 +1,3 @@
-// Bottom up
-
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -26,37 +24,39 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+const int INF = 0x3f3f3f3f;
 int MOD = 1e9 + 7;
+
+int lcs(string X , string Y , int m, int n)
+{
+    int res[m + 1][n + 1];
+    int i, j;
+    for (i = 0; i <= m; i++)
+    {
+        for (j = 0; j <= n; j++)
+        {
+            if (i == 0 || j == 0)
+                res[i][j] = 0;
+
+            else if (X[i - 1] == Y[j - 1])
+                res[i][j] = res[i - 1][j - 1] + 1;
+
+            else
+                res[i][j] = max(res[i - 1][j], res[i][j - 1]);
+        }
+    }
+    return res[m][n];
+}
 
 int main()
 {
-    amazing;
-    ll n, W;
-    cin >> n >> W;
-    ll wt[101], val[101];
-    for (ll i = 1; i <= n; i++)
-    {
-        cin >> wt[i] >> val[i];
-    }
-    ll k[n + 1][W + 1];
-    for (int i = 0; i <= n; i++)
-    {
-        for (int w = 0; w <= W; w++)
-        {
-            if (i == 0 || w == 0)
-            {
-                k[i][w] = 0;
-            }
-            else if (wt[i] <= w)
-            {
-                k[i][w] = max(k[i - 1][w], val[i] + k[i - 1][w - wt[i]]);
-            }
-            else
-            {
-                k[i][w] = k[i - 1][w];
-            }
-        }
-    }
-    cout << k[n][W] << endl;
+    string X;
+    cin >> X;
+    string Y;
+    cin >> Y;
+    int m = X.length();
+    int n = Y.length();
+    int ans = lcs(X, Y, m, n);
+    cout << ans;
     return 0;
 }
