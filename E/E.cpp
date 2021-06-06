@@ -26,6 +26,7 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+const int INF = 0x3f3f3f3f;
 int MOD = 1e9 + 7;
 
 int main()

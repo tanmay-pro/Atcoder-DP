@@ -1,4 +1,3 @@
-// Bottom up
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -17,7 +16,6 @@ using namespace std;
 #define deb2(x, y) cout << #x << " = " << x << ", " << #y << " = " << y << endl
 #define deba(i, a, n) \
     fo(i, n) { cout << a[i] << " "; }
-#define amazing ios_base::sync_with_stdio(false), cin.tie(NULL), cout.tie(NULL);
 typedef pair<int, int> pii;
 typedef pair<ll, ll> pl;
 typedef vector<int> vi;
@@ -26,37 +24,13 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
-int MOD = 1e9 + 7;
 
 int main()
 {
-    amazing;
-    ll n, W;
-    cin >> n >> W;
-    ll wt[101], val[101];
-    for (ll i = 1; i <= n; i++)
+    string a, b;
+    string res = "";
+    fo(i, a.length())
     {
-        cin >> wt[i] >> val[i];
+        
     }
-    ll k[n + 1][W + 1];
-    for (int i = 0; i <= n; i++)
-    {
-        for (int w = 0; w <= W; w++)
-        {
-            if (i == 0 || w == 0)
-            {
-                k[i][w] = 0;
-            }
-            else if (wt[i] <= w)
-            {
-                k[i][w] = max(k[i - 1][w], val[i] + k[i - 1][w - wt[i]]);
-            }
-            else
-            {
-                k[i][w] = k[i - 1][w];
-            }
-        }
-    }
-    cout << k[n][W] << endl;
-    return 0;
 }
