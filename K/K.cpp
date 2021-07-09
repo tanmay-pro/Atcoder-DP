@@ -31,44 +31,45 @@ int p = 31;
 int main()
 {
     amazing;
-    ll n;
-    cin >> n;
-    vector<double> p(n);
+    ll n, k;
+    cin >> n >> k;
+    vl a(n);
+    ll dp[k+1];
     fo(i, n)
     {
-    	cin >> p[i];
+    	cin >> a[i];
     }
-    double dp[n+1][n+1];
-    fo(i, n+1)
+    dp[0] = 0;
+    ll i = 1;
+    while(i < a[0])
     {
-    	fo(j, n+1)
+    	dp[i] = 1;
+    	i++;
+    }
+    dp[i] = -1;
+    Fo(i, a[0] + 1, k+1)
+    {
+    	fo(j, a.size())
 	    {
-    		dp[i][j] = 0;
+    		if(i > a[j] && dp[i - a[j]] == 1)
+		    {
+    			dp[i] = -1;
+    			break;
+		    }
+    		else if( i == a[j])
+		    {
+    			dp[i] = -1;
+		    }
+	    }
+	    if(dp[i] != -1)
+	    {
+	    	dp[i] = 1;
 	    }
     }
-    dp[1][0] = 1 - p[0];
-    dp[1][1] = p[0];
-    Fo(i, 2, n+1)
-    {
-    	fo(j, n+1)
-	    {
-		    if(j == 0)
-		    {
-			    dp[i][0] = dp[i-1][0]*(1 - p[i-1]);
-		    }
-		    else
-		    {
-			    dp[i][j] = dp[i-1][j]*(1 - p[i-1]) + dp[i-1][j-1]*p[i-1];
-		    }
-    	}
-    }
-    double sum = 0;
-    int x = n/2 + 1;
-    while(x != n+1)
-    {
-    	sum += dp[n][x];
-    	x++;
-    }
-	printf("%.10F\n", sum);
+    if(dp[k] == 1)
+        cout << "Second";
+    else
+    	cout << "First";
+    br;
     return 0;
 }
