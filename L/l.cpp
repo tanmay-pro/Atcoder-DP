@@ -33,42 +33,42 @@ int main()
     amazing;
     ll n;
     cin >> n;
-    vector<double> p(n);
+    vl a(n);
+    ll dp[n][n+1];
     fo(i, n)
     {
-    	cin >> p[i];
+    	cin >> a[i];
     }
-    double dp[n+1][n+1];
-    fo(i, n+1)
+    fo(i, n)
     {
     	fo(j, n+1)
 	    {
     		dp[i][j] = 0;
 	    }
     }
-    dp[1][0] = 1 - p[0];
-    dp[1][1] = p[0];
-    Fo(i, 2, n+1)
+    fo(i, n)
     {
-    	fo(j, n+1)
+    	dp[i][1] = a[i];
+    }
+    Fo(j, 1, n+1)
+    {
+		fo(i, n)
 	    {
-		    if(j == 0)
-		    {
-			    dp[i][0] = dp[i-1][0]*(1 - p[i-1]);
-		    }
-		    else
-		    {
-			    dp[i][j] = dp[i-1][j]*(1 - p[i-1]) + dp[i-1][j-1]*p[i-1];
-		    }
-    	}
+			if(i + j - 1 <= n-1 && i+1 <= n-1)
+    		    dp[i][j] = max(a[i] - dp[i+1][j-1], a[i + j - 1] - dp[i][j-1]);
+	    }
     }
-    double sum = 0;
-    int x = n/2 + 1;
-    while(x != n+1)
-    {
-    	sum += dp[n][x];
-    	x++;
-    }
-	printf("%.10F\n", sum);
+//    br;
+//	fo(i, n)
+//	{
+//    	fo(j, n+1)
+//	    {
+//    		cout << dp[i][j] << " ";
+//	    }
+//	    br;
+//	}
+//	br;
+	cout << dp[0][n];
+    br;
     return 0;
 }

@@ -28,47 +28,49 @@ typedef map<ll, ll> mll;
 ll MOD = 1e9 + 7;
 int p = 31;
 
+const int maxim = 1e5 + 1;
+vector<int> edges[maxim];
+int in_degree[maxim];
+int dist[maxim];
+bool visited[maxim];
+
+void dfs(int a)
+{
+	visited[a] = true;
+	for (int b : edges[a])
+	{
+		dist[b] = max(dist[b], dist[a] + 1);
+		--in_degree[b];
+		if (in_degree[b] == 0)
+			dfs(b);
+	}
+}
+
 int main()
 {
-    amazing;
-    ll n;
-    cin >> n;
-    vector<double> p(n);
-    fo(i, n)
-    {
-    	cin >> p[i];
-    }
-    double dp[n+1][n+1];
-    fo(i, n+1)
-    {
-    	fo(j, n+1)
-	    {
-    		dp[i][j] = 0;
-	    }
-    }
-    dp[1][0] = 1 - p[0];
-    dp[1][1] = p[0];
-    Fo(i, 2, n+1)
-    {
-    	fo(j, n+1)
-	    {
-		    if(j == 0)
-		    {
-			    dp[i][0] = dp[i-1][0]*(1 - p[i-1]);
-		    }
-		    else
-		    {
-			    dp[i][j] = dp[i-1][j]*(1 - p[i-1]) + dp[i-1][j-1]*p[i-1];
-		    }
-    	}
-    }
-    double sum = 0;
-    int x = n/2 + 1;
-    while(x != n+1)
-    {
-    	sum += dp[n][x];
-    	x++;
-    }
-	printf("%.10F\n", sum);
-    return 0;
+	amazing;
+	int n, m;
+	cin >> n >> m;
+	while (m--)
+	{
+		int a, b;
+		cin >> a >> b;
+		edges[a].push_back(b);
+		++in_degree[b];
+	}
+	Fo(i, 1, n+1)
+	{
+		if(!visited[i] && in_degree[i] == 0)
+		{
+			dfs(i);
+		}
+	}
+	int answer = 0;
+	Fo(i, 1, n+1)
+	{
+		answer = max(answer, dist[i]);
+	}
+	cout << answer;
+	br;
+	return 0;
 }
